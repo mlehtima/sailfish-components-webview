@@ -122,6 +122,8 @@ void SailfishOS::WebEngineSettings::initialize()
     connect(silicaTheme, &Silica::Theme::colorSchemeChanged,
             engineSettings, &SailfishOS::WebEngineSettings::notifyColorSchemeChanged);
 
+    isInitialized = true;
+
     // Guard preferences that should be written only once. If a preference needs to be
     // forcefully written upon each start that should happen before this.
     QString appConfig = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
@@ -198,8 +200,6 @@ void SailfishOS::WebEngineSettings::initialize()
     // Enable user agent overrides
     engineSettings->setPreference(QStringLiteral("general.useragent.updates.enabled"),
                                   QVariant::fromValue<bool>(true));
-
-    isInitialized = true;
 
     markerFile.open(QIODevice::ReadWrite | QIODevice::Truncate);
     markerFile.close();
